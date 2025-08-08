@@ -6,11 +6,19 @@ import MessageSkeleton from "./Skeletons/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
 
 const ChatContainer = () => {
-  const { messages, getMessages, isMessagesLoading, selectedUser} = useChatStore();
+  const { messages, getMessages, 
+    isMessagesLoading, selectedUser, 
+    subscribeToMessages, 
+    unsubscribeFromMessage} = useChatStore();
   const { authUser } = useAuthStore();
+  
   useEffect(() => {
       getMessages(selectedUser._id);
-  }, [selectedUser._id, getMessages])
+      subscribeToMessages(selectedUser._id);
+
+      //clean up
+      return () => unsubscribeFromMessage();  
+  }, [selectedUser._id])
 
   if(isMessagesLoading) return (
     <div className="flex flex-1 flex-col overflow-auto">
@@ -38,7 +46,7 @@ const ChatContainer = () => {
                   <div className="chat-header mb-1">
                     <time className="text-xs opacity-50 ml-1">{message.createdAt}</time>
                   </div>
-                  <div className="chat-bubble flex">
+                  <div className="chat-bubble flex flex-col">
                       {message.image && (
                         <img 
                           src={message.image}

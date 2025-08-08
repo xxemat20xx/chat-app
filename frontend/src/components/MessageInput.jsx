@@ -28,7 +28,7 @@ const MessageInput = () => {
 
   const handleSendMessage = async(e) => {
     e.preventDefault();
-    if(!text.trim() && imagePreview) return;
+    if(!text.trim() && !imagePreview) return;
       try {
         await sendMessage({
           text: text.trim(),
@@ -63,6 +63,7 @@ const MessageInput = () => {
               <input type="text" 
               className="w-full input input-bordered rounded-lg input-sm sm:input-md"
               placeholder="Type a message..."
+              value={text || ''}
               onChange={(e) => setText(e.target.value)}/>
 
               <input type="file" 

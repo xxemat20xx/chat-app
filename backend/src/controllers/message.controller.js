@@ -55,9 +55,10 @@ export const sendMessages = async(req, res) => {
 
         // realtime functionality here => socket.io
         const receiverSocketId = getReceiverSocketId(receiverId);
-        if(receiverSocketId){
-            io.to(receiverId).emit("newMessage", newMessage);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
         }
+
 
     res.status(201).json(newMessage);
     } catch (error) {

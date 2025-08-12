@@ -60,12 +60,13 @@ subscribeToMessages: (userId) => {
     socket.off("newMessage"); // prevent duplicate listeners
 
     socket.on("newMessage", (newMessage) => {
-        const { messages } = get();
+        
         if (
             newMessage.senderId === userId || 
             newMessage.receiverId === userId
         ) {
-            set({ messages: [...messages, newMessage] });
+            
+            set({ messages: [...get().messages, newMessage] });
         }
     });
 },
@@ -75,6 +76,6 @@ unsubscribeFromMessage: () => {
     socket.off("newMessage");
 },
 
-    // Select a user for the current chat
-    setSelectedUser: (selectedUser) => set({ selectedUser }),
+// Select a user for the current chat
+setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));

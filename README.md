@@ -1,6 +1,7 @@
 <pre>
   <h1>MERN: Chat App </h1>
-  Coding along: https://www.youtube.com/watch?v=ntKkVrQqBYY&t=15363s
+  Coding along: Ref: 
+  <a href="https://www.youtube.com/watch?v=ntKkVrQqBYY&t=15363s">Codesistency Chat app video</a>
   
 </pre>
 
